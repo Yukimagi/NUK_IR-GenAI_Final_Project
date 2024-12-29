@@ -1,3 +1,4 @@
+#streamlit run C:/Users/USER/Python_code/ir_genAI/IR_Final.py
 import asyncio
 from datetime import datetime, timedelta
 from supabase import create_client, Client
@@ -118,7 +119,9 @@ def user(result):
         
         st.write("請對故事進行評價：")
         st.session_state.feedback = st.text_input("請輸入您的反饋：")
-        st.session_state.user_score = st.slider("請為故事評分：", min_value=0, max_value=1, step=1)
+        # 使用更細的步長，例如 0.05，讓使用者選擇 0 到 1 之間的值，包含 0.1、0.2、0.15 等
+        st.session_state.user_score = st.slider("請為故事評分：", min_value=0.0, max_value=1.0, step=0.01)
+        
         # 定義兩個按鈕
         generate_button = st.form_submit_button("產生結果")
         optimize_button = st.form_submit_button("繼續優化")
