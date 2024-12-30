@@ -40,7 +40,7 @@ def StoryRAG(user_prompt, modelType):
     """
     system_prompt = """
     你是一個專業的新聞說故事小幫手，
-    你的目標是根據retrieved_content的新聞內容，改編出有趣的故事。
+    你的目標是根據retrieved_content的新聞內容，產生故事，但不行偏離參考新聞資料。
     """
 
     # 獲取當前路徑
