@@ -11,11 +11,11 @@
 ### About Code
 - IR_Final: UI、Optimize Prompt、Main function(merge all function)、User feedback、set up and so on...
 
-1.User Preference Interface
-2.Dynamic Prompt Engineering Module
-3.Generative AI Integration
-4.Automatic Content Evaluation & Feedback Loop
-5.Output Visualization and Personalization
+##### 1.User Preference Interface
+##### 2.Dynamic Prompt Engineering Module
+##### 3.Generative AI Integration
+##### 4.Automatic Content Evaluation & Feedback Loop
+##### 5.Output Visualization and Personalization
 
 - StoryRAG:Generate Story by midterm database.(Create by RAG)
 
