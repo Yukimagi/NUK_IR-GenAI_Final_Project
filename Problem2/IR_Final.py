@@ -95,11 +95,22 @@ async def chat_first(query,modelType):
 async def chat_mutate(query,modelType):
     return await together_response_mutate(query, modelType)
 
+def convert_float32_to_float(obj):
+    if isinstance(obj, np.float32):
+        return float(obj)  # 將 np.float32 轉換為 float
+    elif isinstance(obj, dict):
+        return {key: convert_float32_to_float(value) for key, value in obj.items()}
+    elif isinstance(obj, list):
+        return [convert_float32_to_float(item) for item in obj]
+    else:
+        return obj
 
 def save_result_to_json(result, file_name):
-    """Save result data to a JSON file."""
+    # 轉換 result 中的所有 np.float32 為 float
+    result = convert_float32_to_float(result)
     with open(file_name, 'w', encoding='utf-8') as f:
         json.dump(result, f, ensure_ascii=False, indent=4)
+
 
 def load_result_from_json(file_name):
     """Load result data from a JSON file."""
