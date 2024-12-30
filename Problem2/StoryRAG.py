@@ -8,6 +8,7 @@ pip install numpy                  # 數據處理
 pip install google-generativeai    # Google 生成式 AI 客戶端
 pip install transformers           # Transformer 模型相關工具（如果需要其他嵌入模型）
 pip install jieba                  # 分詞工具（若後續需要中文文本分詞）
+pip install pip install -U langchain-community
 """
 
 from langchain.document_loaders import PyMuPDFLoader
@@ -16,9 +17,11 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import InMemoryVectorStore
 from together import Together
 import os
+from dotenv import load_dotenv
 
 os.environ["GOOGLE_API_KEY"] = "AIzaSyAaQ8WdoHUV2K07H8h_O6dom5lDR0vHb4o"
-
+# 載入 .env 文件
+load_dotenv()
 # Together API Client 初始化
 together_client = Together(api_key=os.environ.get("TOGETHER_API_KEY3"))
 

@@ -27,15 +27,13 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 
 def evaluate_story(
-    story_id,
     content,
     prompt,
-    reference_text=None,
+    reference_text,
     model_name="paraphrase-multilingual-MiniLM-L12-v2",
 ):
     """
     評估故事文本
-    :param story_id: 故事的 ID
     :param content: 已生成的文本
     :param prompt: 提示文本，用來判斷相關性。(文本是否與參考文本或主題保持一致，並且提供有效的回應或信息。)
     :param reference_text: 參考文本 (可選)
@@ -65,17 +63,14 @@ def evaluate_story(
     creativity = calculate_diversity(content)
 
     # 相關性評分 (與參考文本的相似度, 若有)
-    relevance = None
-    if reference_text:
-        relevance = calculate_similarity(reference_text, content)  #
+    relevance = calculate_similarity(reference_text, content)  #
 
     # 返回包含 ID 和評估結果的字典
     return {
-        "id": story_id,
         "scores": {
             "Coherence": round(coherence, 4),
             "Creativity": round(creativity, 4),
-            "Relevance": round(relevance, 4) if relevance is not None else "N/A",
+            "Relevance": round(relevance, 4) ,
         },
     }
 
@@ -83,7 +78,6 @@ def evaluate_story(
 # 測試使用
 if __name__ == "__main__":
     # 測試數據
-    story_id = "001"
     prompt = "請給我一段關於健康的故事。"
     content = """
     小晴是一位在都市裡工作的年輕人，每天忙於應付工作壓力，過著作息不規律、飲食隨便的生活。早餐常常被忽略，午餐則以速食解決，晚餐則是宵夜和外賣的組合。這樣的生活方式讓她的健康狀況逐漸惡化。
@@ -95,10 +89,10 @@ if __name__ == "__main__":
     """
     reference_text = None
 
-    result = evaluate_story(story_id, content, prompt, reference_text)
+    result = evaluate_story(content, prompt)
     print("評分結果:", result)
 
 
 """ test result
-評分結果: {'id': '001', 'scores': {'Coherence': np.float32(0.4191), 'Creativity': 0.5214, 'Relevance': 'N/A'}}
+評分結果: {'scores': {'Coherence': 0.4191, 'Creativity': 0.5214, 'Relevance': 0.4191}}
 """
